@@ -1,0 +1,22 @@
+name: Build IPA
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build IPA
+        run: |
+          chmod +x build_ipa.sh
+          ./build_ipa.sh
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: TimerApp
+          path: TimerApp.ipa
